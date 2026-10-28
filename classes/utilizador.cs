@@ -11,6 +11,16 @@
         public void RegistarUtilizador() {}
         public void EfetuarLogin() {}
         public void AtualizarPerfil() {}
+
+        // Construtor com todos os atributos
+        public Utilizador(int id, string nomeUtilizador, string email, string palavraPasse, string numeroTelefone)
+        {
+            Id = id;
+            NomeUtilizador = nomeUtilizador;
+            Email = email;
+            PalavraPasse = palavraPasse;
+            NumeroTelefone = numeroTelefone;
+        }
     }
  
 
