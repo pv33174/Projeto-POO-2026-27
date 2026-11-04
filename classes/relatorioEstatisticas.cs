@@ -1,4 +1,4 @@
-class RelatorioEstatisticas
+public class RelatorioEstatisticas
 {
     private List<Reserva> ListaReservas = new List<Reserva>();
     private List<EspacoDesportivo> ListaEspacos = new List<EspacoDesportivo>();
