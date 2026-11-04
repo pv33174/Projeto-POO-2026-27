@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 public class Utilizador
     {
-        static List<Utilizador> Utilizadores = new List<Utilizador>();
         public int Id { get; set; }
 
         public string NomeUtilizador { get; set; }
