@@ -3,17 +3,6 @@ public class RelatorioEstatisticas
     private List<Reserva> ListaReservas = new List<Reserva>();
     private List<EspacoDesportivo> ListaEspacos = new List<EspacoDesportivo>();
 
-
-    // --- Gestão das listas ---
-    public void AdicionarReserva(Reserva ListaReservas)
-    {
-        reservas.Add(reserva);
-    }
-    public void AdicionarEspaco(EspacoDesportivo ListaEspaços)
-    {
-        espacos.Add(espaco);
-    }
-
     // --- Estatísticas ---
     public int ObterTotalReservas()
     {
