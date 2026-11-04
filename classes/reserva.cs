@@ -1,6 +1,22 @@
 class Reserva
 {
-    
+    public int Id { get; set; }
+    public Cliente Cliente { get; set; }
+    public EspacoDesportivo Espaco { get; set; }
+    public DateTime Dia { get; set; }
+    public TimeSpan HoraInicio { get; set; }
+    public TimeSpan HoraFim { get; set; }
+    public string Estado { get; set; }
+
+    public void ConfirmarReserva()
+    {
+        Estado = "Confirmada";
+    }
+
+    public void CancelarReserva()
+    {
+        Estado = "Cancelada";
+    }
 }
 
 
