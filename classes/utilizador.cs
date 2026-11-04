@@ -9,7 +9,6 @@ public class Utilizador
         public string PalavraPasse { get; set; }
 
         //Metodos Utilizador
-        public void RegistarUtilizador() {}
         public void EfetuarLogin() {}
         public void AtualizarPerfil() {}
 
