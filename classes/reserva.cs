@@ -9,6 +9,19 @@ public class Reserva
     public string Estado { get; set; }
 
 
+//Construtor
+    public Reserva(int id, string nomeCliente, string nomeEspaco, DateTime dia, TimeSpan horaInicio, TimeSpan horaFim, string estado)
+    {
+        Id = id;
+        Cliente = nomeCliente;
+        Espaco = nommeEspaco;
+        DateTime = dia;
+        TimeSpan = horaInicio;
+        TimeSpan = horaFim;
+        Estado = estado;
+    }
+
+ //Metodos
     public void ConfirmarReserva()
     {
         Estado = "Confirmada";
@@ -20,16 +33,14 @@ public class Reserva
         Estado = "Cancelada";
     }
 
-    public Reserva(int id, string nomeCliente, string nomeEspaco, DateTime dia, TimeSpan horaInicio, TimeSpan horaFim, string estado)
+    public void AdicionarEquipamento()
     {
-        Id = id;
-        Cliente = nomeCliente;
-        Espaco = nommeEspaco;
-        DateTime = dia;
-        TimeSpan = horaInicio;
-        TimeSpan = horaFim;
-        Estado = estado;
+        
     }
+
+
+
+
 }
 
 
