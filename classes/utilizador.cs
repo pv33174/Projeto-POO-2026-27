@@ -14,10 +14,7 @@ public class Utilizador
         public void EfetuarLogin() {}
         public void AtualizarPerfil() {}
 
-        // Construtor vazio
-        public Utilizador() { }
-
-        // Construtor com todos os atributos
+        // Construtor 
         public Utilizador(int id, string nomeUtilizador, string email, string palavraPasse)
         {
             Id = id;
