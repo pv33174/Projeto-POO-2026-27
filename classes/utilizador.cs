@@ -1,5 +1,8 @@
- public class Utilizador
+using System.ComponentModel.DataAnnotations;
+
+public class Utilizador
     {
+        static List<Utilizador> Utilizadores = new List<Utilizador>();
         public int Id { get; set; }
 
         public string NomeUtilizador { get; set; }
@@ -11,8 +14,11 @@
         public void EfetuarLogin() {}
         public void AtualizarPerfil() {}
 
+        // Construtor vazio
+        public Utilizador() { }
+
         // Construtor com todos os atributos
-        public Utilizador(int id, string nomeUtilizador, string email, string palavraPasse, string numeroTelefone)
+        public Utilizador(int id, string nomeUtilizador, string email, string palavraPasse)
         {
             Id = id;
             NomeUtilizador = nomeUtilizador;
@@ -46,11 +52,13 @@
 
             } while (existencia); bool existencia;
 
-            novoUtilizador.ID = id;
+            novoUtilizador.ID = AtribuirID();
             novoUtilizador.nome = PedirNome();
-            novoUtilizador.idade = PedirIdade();
+            novoUtilizador.email = PedirEmail();
+            novoUtilizador.palavraPasse = PedirPalavraPasse();
 
             Utilizadores.Add(novoUtilizador);
+
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("Utilizador registado com Sucesso!");
             Console.ResetColor();
@@ -59,7 +67,7 @@
         static string PedirNome()
         {
             string nome;
-            Console.WriteLine("Insira o Nome: ");
+            Console.WriteLine("Insira o seu Nome: ");
             nome = Console.ReadLine();
             nome = ValidarNome(nome);
 
@@ -78,7 +86,71 @@
                 nome = Console.ReadLine();
             }
 
-        return nome;
+            return nome;
+        }
+
+        static string PedirEmail()
+        {
+            string email;
+            Console.WriteLine("Insira o seu Email: ");
+            email = Console.ReadLine();
+            email = ValidarEmail(email);
+
+            return email;
+        }
+
+        // Email válido: não vazio e com @
+        static string ValidarEmail(string email)
+        {
+            while (email.Trim() == "" || !email.Contains("@"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Email Inválido");
+                Console.ResetColor();
+                Console.WriteLine("Insira o seu Email novamente: ");
+
+                nome = Console.ReadLine();
+            }
+        }
+
+        static string PedirPalavraPasse()
+        {
+            Console.WriteLine("Insira a Palavra-passe: ");
+            string pass = Console.ReadLine();
+
+                while (pass.Trim() == "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Palavra-passe inválida.");
+                    Console.ResetColor();
+                    Console.WriteLine("Insira a Palavra-passe novamente: ");
+                    pass = Console.ReadLine();
+                }
+
+            return pass;
+        }
+
+       static int AtribuirId()
+        {
+            int maior = 0;
+
+            foreach (Utilizador u in Utilizadores)
+            {
+                if (u.Id > maior)
+                {
+                    maior = u.Id;
+                }
+            }
+
+            return maior + 1;
+        }
+
+        static void ListarUtilizadores()
+        {
+            foreach (Utilizador u in Utilizadores)
+            {
+                Console.WriteLine("ID: " + u.Id + " | Nome: " + u.NomeUtilizador + " | Email: " + u.Email);
+            }
         }
     
 
