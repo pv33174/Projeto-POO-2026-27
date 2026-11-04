@@ -1,20 +1,20 @@
 public class Cliente : Utilizador
+{
+    //Metodos Reservas
+    public void ConsultarMinhasReservas()
     {
-        //Metodos Reservas
-        public void ConsultarMinhasReservas()
-        {
             
-        }
-        public void CriarReserva()
-        {
-            
-        }
-        public void AlterarReserva()
-        {
-            
-        }
-        public void CancelarReserva()
-        {
-            
-        }
     }
+    public void CriarReserva()
+    {
+            
+    }
+    public void AlterarReserva()
+    {
+            
+    }
+    public void CancelarReserva()
+    {
+            
+    }
+}
