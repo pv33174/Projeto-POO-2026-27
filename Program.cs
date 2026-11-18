@@ -27,6 +27,38 @@ class Program
         }
     }
 
+     // ---------- Registo ----------
+    private void MostrarFormularioRegisto()
+    {
+        Utilizador novo = utilizador.CriarConta();
+
+        MostrarSucesso("Conta criada com sucesso! ID atribuído: " + novo.Id);
+        MostrarPerfil(novo);   // entra logo na conta
+    }
+
+    // ---------- Login ----------
+    private void MostrarFormularioLogin()
+    {
+        Console.WriteLine("\n--- Entrar ---");
+
+        Console.Write("Email: ");
+        string email = Console.ReadLine().Trim();
+        Console.Write("Palavra-passe: ");
+        string palavraPasse = Console.ReadLine();
+
+        Utilizador u = sistema.Autenticar(email, palavraPasse);
+
+        if (u == null)
+        {
+            MostrarErro("Email ou palavra-passe incorretos.");
+            return;
+        }
+
+        MostrarSucesso("Login efetuado.");
+        MostrarPerfil(u);
+    }
+
+
 
 
 }
