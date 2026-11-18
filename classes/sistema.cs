@@ -7,6 +7,65 @@ public class Sistema
     public List<Reserva> Reserva { get; set; } = new List<Reserva>();
 
 
+        // Guardar novo utilizador
+        public void GuardarUtilizador(Utilizador utilizador)
+        {
+            utilizadores.Add(utilizador);
+        }
+
+        // Procurar por email (devolve null se não existir)
+        public Utilizador ObterPorEmail(string email)
+        {
+            foreach (Utilizador u in utilizadores)
+            {
+                if (string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase))
+                {
+                    return u;
+                }
+            }
+            return null;
+        }
+
+        public Utilizador ObterPorId(int id)
+        {
+            foreach (Utilizador u in utilizadores)
+            {
+                if (u.Id == id)
+                {
+                    return u;
+                }
+            }
+            return null;
+        }
+
+        // Reservas de um utilizador
+        public List<Reserva> ObterReservasPorUtilizador(int idUtilizador)
+        {
+            List<Reserva> resultado = new List<Reserva>();
+
+            foreach (Reserva r in reservas)
+            {
+                if (r.IdUtilizador == idUtilizador)
+                {
+                    resultado.Add(r);
+                }
+            }
+            return resultado;
+        }
+
+        // Atualizar dados de um utilizador existente
+        public void AtualizarUtilizador(Utilizador utilizador)
+        {
+            for (int i = 0; i < utilizadores.Count; i++)
+            {
+                if (utilizadores[i].Id == utilizador.Id)
+                {
+                    utilizadores[i] = utilizador;
+                    return;
+                }
+            }
+        }
+
     //Metodos do Espaco
         public void CriarEspaco() {}
         public void EliminarEspaco() {}

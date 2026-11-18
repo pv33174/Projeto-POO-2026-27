@@ -1,5 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-
+// using System.ComponentModel.DataAnnotations; quem colocou isto?
 public class Utilizador
 {
         public int Id { get; set; }
