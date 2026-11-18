@@ -7,64 +7,80 @@ public class Sistema
     public List<Reserva> Reserva { get; set; } = new List<Reserva>();
 
 
-        // Guardar novo utilizador
-        public void GuardarUtilizador(Utilizador utilizador)
-        {
-            utilizadores.Add(utilizador);
-        }
+    // Guardar novo utilizador
+    public void GuardarUtilizador(Utilizador utilizador)
+    {
+        utilizadores.Add(utilizador);
+    }
 
-        // Procurar por email (devolve null se não existir)
-        public Utilizador ObterPorEmail(string email)
+    // Procurar por email (devolve null se não existir)
+    public Utilizador ObterPorEmail(string email)
+    {
+        foreach (Utilizador u in utilizadores)
         {
-            foreach (Utilizador u in utilizadores)
+            if (string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase))
             {
-                if (string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase))
-                {
-                    return u;
-                }
+                return u;
             }
-            return null;
         }
+        return null;
+    }
 
-        public Utilizador ObterPorId(int id)
+    public Utilizador ObterPorId(int id)
+    {
+        foreach (Utilizador u in utilizadores)
         {
-            foreach (Utilizador u in utilizadores)
+            if (u.Id == id)
             {
-                if (u.Id == id)
-                {
-                    return u;
-                }
+                return u;
             }
-            return null;
         }
+        return null;
+    }
+    
+    // Reservas de um utilizador
+    public List<Reserva> ObterReservasPorUtilizador(int idUtilizador)
+    {
+        List<Reserva> resultado = new List<Reserva>();
 
-        // Reservas de um utilizador
-        public List<Reserva> ObterReservasPorUtilizador(int idUtilizador)
+        foreach (Reserva r in reservas)
         {
-            List<Reserva> resultado = new List<Reserva>();
-
-            foreach (Reserva r in reservas)
+            if (r.IdUtilizador == idUtilizador)
             {
-                if (r.IdUtilizador == idUtilizador)
-                {
                     resultado.Add(r);
-                }
             }
-            return resultado;
         }
+        return resultado;
+    }
 
-        // Atualizar dados de um utilizador existente
-        public void AtualizarUtilizador(Utilizador utilizador)
+    // Atualizar dados de um utilizador existente
+    public void AtualizarUtilizador(Utilizador utilizador)
+    {
+        for (int i = 0; i < utilizadores.Count; i++)
         {
-            for (int i = 0; i < utilizadores.Count; i++)
+            if (utilizadores[i].Id == utilizador.Id)
             {
-                if (utilizadores[i].Id == utilizador.Id)
-                {
-                    utilizadores[i] = utilizador;
-                    return;
-                }
+                utilizadores[i] = utilizador;
+                return;
             }
         }
+    }
+
+    // Só para testes
+    public void GuardarReserva(Reserva reserva)
+    {
+        reservas.Add(reserva);
+    }
+
+    public int AtribuirIdReserva()
+    {
+        return reservas.Count + 1;
+    }
+
+    public List<Utilizador> ObterTodos()
+    {
+        return utilizadores;
+    }
 
     //Metodos do Espaco
         public void CriarEspaco() {}
