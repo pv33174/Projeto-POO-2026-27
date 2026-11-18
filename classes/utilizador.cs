@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 public class Utilizador
-    {
+{
         public int Id { get; set; }
 
         public string NomeUtilizador { get; set; }
@@ -21,44 +21,108 @@ public class Utilizador
             PalavraPasse = palavraPasse;
         }
 
-        public void RegistarUtilizador(List<Utilizador> utilizador)
+        
+
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+        // ------ CRIAR CONTA ------
+        static void CriarConta()
         {
-            Utilizador novoUtilizador = new Utilizador();
-            bool existencia;
-            do
+            string email = PedirEmail();
+
+            if (EmailExiste(email))
             {
-                Console.WriteLine("Insira o ID: ");
-                id = Console.ReadLine();
+                MostrarErro("Não pode criar conta com este email: já está associado a outra conta.");
+                return;
+            }
 
-                existencia = false;
+            string palavraPasse = PedirPalavraPasse();
+            string nome = PedirNome();   // novo
 
-                foreach (Utilizador utilizador in Utilizadores)
+            Utilizador novo = new Utilizador
+            {
+                Id = AtribuirId(),
+                NomeUtilizador = nome,
+                Email = email,
+                PalavraPasse = palavraPasse
+            };
+
+            Utilizadores.Add(novo);
+        }
+
+        static string PedirEmail()
+        {
+            string email;
+            Console.WriteLine("Insira o seu Email: ");
+            email = Console.ReadLine();
+            email = ValidarEmail(email);
+
+            return email;
+        }
+
+        // Email válido: não vazio e com @
+        static string ValidarEmail(string email)
+        {
+            while (email.Trim() == "" || !email.Contains("@"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Email Inválido");
+                Console.ResetColor();
+                Console.WriteLine("Insira o seu Email novamente: ");
+
+                email = Console.ReadLine();
+            }
+        }
+
+        // ------ Atribuir ID ------
+        static int AtribuirId()
+        {
+            int maior = 0;
+
+            foreach (Utilizador u in Utilizadores)
+            {
+                if (u.Id > maior)
                 {
-                    if (utilizador.ID == id)
-                    {
-                        existencia = true;
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.WriteLine("Esse ID já existe escolha outro");
-                        Console.ResetColor();
+                    maior = u.Id;
+                }
+            }
 
-                        break;
-                    }
+            return maior + 1;
+        }
+
+        // ------ Pedir Palavra-passe ------
+        static string PedirPalavraPasse()
+        {
+            Console.WriteLine("Insira a Palavra-passe: ");
+            string pass = Console.ReadLine();
+
+                while (pass.Trim() == "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Palavra-passe inválida.");
+                    Console.ResetColor();
+                    Console.WriteLine("Insira a Palavra-passe novamente: ");
+                    pass = Console.ReadLine();
                 }
 
-            } while (existencia); bool existencia;
+            return pass;
+        }
 
-            novoUtilizador.ID = AtribuirID();
-            novoUtilizador.nome = PedirNome();
-            novoUtilizador.email = PedirEmail();
-            novoUtilizador.palavraPasse = PedirPalavraPasse();
-
-            Utilizadores.Add(novoUtilizador);
-
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Utilizador registado com Sucesso!");
-            Console.ResetColor();
-
-
+        // ------ Pedir Nome ------
         static string PedirNome()
         {
             string nome;
@@ -84,74 +148,15 @@ public class Utilizador
             return nome;
         }
 
-        static string PedirEmail()
-        {
-            string email;
-            Console.WriteLine("Insira o seu Email: ");
-            email = Console.ReadLine();
-            email = ValidarEmail(email);
 
-            return email;
-        }
-
-        // Email válido: não vazio e com @
-        static string ValidarEmail(string email)
-        {
-            while (email.Trim() == "" || !email.Contains("@"))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Email Inválido");
-                Console.ResetColor();
-                Console.WriteLine("Insira o seu Email novamente: ");
-
-                nome = Console.ReadLine();
-            }
-        }
-
-        static string PedirPalavraPasse()
-        {
-            Console.WriteLine("Insira a Palavra-passe: ");
-            string pass = Console.ReadLine();
-
-                while (pass.Trim() == "")
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Palavra-passe inválida.");
-                    Console.ResetColor();
-                    Console.WriteLine("Insira a Palavra-passe novamente: ");
-                    pass = Console.ReadLine();
-                }
-
-            return pass;
-        }
-
-       static int AtribuirId()
-        {
-            int maior = 0;
-
-            foreach (Utilizador u in Utilizadores)
-            {
-                if (u.Id > maior)
-                {
-                    maior = u.Id;
-                }
-            }
-
-            return maior + 1;
-        }
-
+        // ------ Adicionar à lista o utilizador ------
         static void ListarUtilizadores()
         {
             foreach (Utilizador u in Utilizadores)
             {
-                Console.WriteLine("ID: " + u.Id + " | Nome: " + u.NomeUtilizador + " | Email: " + u.Email);
+                Console.WriteLine("ID: " + u.Id + " ; Nome: " + u.NomeUtilizador + " ; Email: " + u.Email);
             }
         }
-    
-
-    }
-
-
 
 
 }
